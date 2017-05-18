@@ -1,4 +1,4 @@
-import { IHabiticaData, IHabit } from "src/IHabiticaData";
+import { IHabit } from "src/IHabiticaData";
 import { postSmash } from "./smash";
 import { requestUserData } from "./userData";
 
@@ -7,7 +7,7 @@ function getLowestValueHabit(habits: IHabit[]): IHabit {
     let lowestValue: number;
     habits.forEach((habit) => {
         if (habit.value < lowestValue || lowestValue === undefined) {
-            res = habit; 
+            res = habit;
             lowestValue = habit.value;
         }
     });
@@ -20,24 +20,18 @@ function bumpHabitValue(habit: IHabit, str: number) {
 }
 
 function multiSmash(numberOfSmashes: number) {
-    requestUserData((res) => {
-        console.log(">>>> user data status code", res.statusCode);
-        let body = "";
-        res.setEncoding("utf8");
-        res.on("data", (chunk) => {
-            body += chunk;
-        });
-        res.on("end", () => {
-            const userData: IHabiticaData = JSON.parse(body);
-            const habit = getLowestValueHabit(userData.tasks.habits);
-            console.log(">>>> lowest habit", habit.text); 
-            postSmash(habit.id, () => {
-                console.log(">>>> before value", habit.value);
-                bumpHabitValue(habit, userData.stats.str);
-                console.log(">>>> after value", habit.value);
-            });
+    requestUserData((userData) => {
+        const habit = getLowestValueHabit(userData.tasks.habits);
+        console.log(">>>> lowest habit", habit.text, habit.value);
+        postSmash(habit.id, () => {
+            bumpHabitValue(habit, userData.stats.str);
         });
     });
 }
 
-multiSmash(1);
+const smashCount = +process.argv[2];
+if (isNaN(smashCount)) {
+    console.log("Non-numeric input parameter");
+    process.exit(1);
+}
+multiSmash(smashCount);
