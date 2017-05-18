@@ -4,7 +4,7 @@ import { credentials } from "../secret/credentials";
 import { IHabit } from "src/IHabiticaData";
 
 
-export function postSmash(habitId: string, onEnd: (res: IncomingMessage) => void) {
+export function postSmash(habitId: string, onEnd: () => void) {
     const options: RequestOptions = {
         method: "POST",
         host: "habitica.com",
@@ -14,17 +14,21 @@ export function postSmash(habitId: string, onEnd: (res: IncomingMessage) => void
             "x-api-key": credentials.habToken,
         }
     }
-    
+
     const req = request(options, (res) => {
         console.log(">>>> smash status code", res.statusCode);
+        let body = "";
         res.setEncoding("utf8");
-        if (res.statusCode != 200) {
-            res.on("data", (chunk) => {
-                console.log("Skill request failed with the following response:", chunk);
-            });
-        }
-        res.on("end", onEnd);
+        res.on("data", (chunk) => {
+            body += chunk;
+        });
+        res.on("end", () => {
+            if (res.statusCode != 200) {
+                const bodyJson = JSON.parse(body);
+                console.log(`${res.statusCode} ${bodyJson["error"]}: ${bodyJson["message"]}`);
+            }
+            onEnd();
+        });
     });
-
     req.end();
 }

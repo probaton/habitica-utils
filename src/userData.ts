@@ -13,7 +13,7 @@ export function requestUserData(onEnd: (userData: IHabiticaData) => void) {
             "x-api-key": credentials.habToken
         }
     }
-    
+
     const req = request(options, (res) => {
         console.log(">>>> user data status code", res.statusCode);
         let body = "";
@@ -22,10 +22,15 @@ export function requestUserData(onEnd: (userData: IHabiticaData) => void) {
             body += chunk;
         });
         res.on("end", () => {
-            const userData: IHabiticaData = JSON.parse(body);
-            onEnd(userData);
+            if (res.statusCode != 200) {
+                const bodyJson = JSON.parse(body);
+                console.log(`${res.statusCode} ${bodyJson["error"]}: ${bodyJson["message"]}`);
+            } else {
+                const userData: IHabiticaData = JSON.parse(body);
+                onEnd(userData);
+            }
         });
     });
-    
+
     req.end();
 }

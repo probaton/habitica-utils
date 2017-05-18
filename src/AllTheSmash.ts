@@ -19,13 +19,22 @@ function bumpHabitValue(habit: IHabit, str: number) {
     habit.value += smashMod;
 }
 
-function multiSmash(numberOfSmashes: number) {
+function multiSmash(smashCount: number) {
+
     requestUserData((userData) => {
         const habit = getLowestValueHabit(userData.tasks.habits);
-        console.log(">>>> lowest habit", habit.text, habit.value);
-        postSmash(habit.id, () => {
-            bumpHabitValue(habit, userData.stats.str);
-        });
+
+        function smash() {
+            postSmash(habit.id, () => {
+                bumpHabitValue(habit, userData.stats.str);
+                smashCount -= 1;
+                if (smashCount > 0) {
+                    smash();
+                }
+            });
+        }
+
+        smash();
     });
 }
 
