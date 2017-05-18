@@ -4,11 +4,11 @@ import { credentials } from "../secret/credentials";
 import { IHabit } from "src/IHabiticaData";
 
 
-export function postSmash(habitId: string, onEnd: () => void) {
+export function useSkill(skill: Skills, habitId: string, onEnd: () => void) {
     const options: RequestOptions = {
         method: "POST",
         host: "habitica.com",
-        path: "/api/v3/user/class/cast/smash?targetId=" + habitId,
+        path: `/api/v3/user/class/cast/${skill}?targetId=${habitId}`,
         headers: {
             "x-api-user": credentials.habId,
             "x-api-key": credentials.habToken,
@@ -16,7 +16,6 @@ export function postSmash(habitId: string, onEnd: () => void) {
     }
 
     const req = request(options, (res) => {
-        console.log(">>>> smash status code", res.statusCode);
         let body = "";
         res.setEncoding("utf8");
         res.on("data", (chunk) => {
@@ -32,3 +31,21 @@ export function postSmash(habitId: string, onEnd: () => void) {
     });
     req.end();
 }
+
+export type Skills = 
+    "fireball" |
+    "mpHeal" |
+    "earth" |
+    "frost" |
+    "smash" |
+    "defensiveStance" |
+    "valorousPresence" |
+    "intimidate" |
+    "pickPocket" |
+    "backStab" |
+    "toolsOfTrade" |
+    "stealth" |
+    "heal" |
+    "protectAura" |
+    "brightness" |
+    "healAll";

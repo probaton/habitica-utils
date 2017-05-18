@@ -1,5 +1,5 @@
 import { IHabit } from "src/IHabiticaData";
-import { postSmash } from "./smash";
+import { useSkill, Skills } from "./useSkill";
 import { requestUserData } from "./userData";
 
 function getLowestValueHabit(habits: IHabit[]): IHabit {
@@ -20,12 +20,11 @@ function bumpHabitValue(habit: IHabit, str: number) {
 }
 
 function multiSmash(smashCount: number) {
-
     requestUserData((userData) => {
         const habit = getLowestValueHabit(userData.tasks.habits);
 
         function smash() {
-            postSmash(habit.id, () => {
+            useSkill("smash", habit.id, () => {
                 bumpHabitValue(habit, userData.stats.str);
                 smashCount -= 1;
                 if (smashCount > 0) {

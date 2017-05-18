@@ -15,7 +15,6 @@ export function requestUserData(onEnd: (userData: IHabiticaData) => void) {
     }
 
     const req = request(options, (res) => {
-        console.log(">>>> user data status code", res.statusCode);
         let body = "";
         res.setEncoding("utf8");
         res.on("data", (chunk) => {
