@@ -38,3 +38,27 @@ export interface IHabit {
     up: true
     id: string
 }
+
+export function getLowestValueHabit(habits: IHabit[]): IHabit {
+    let res: IHabit;
+    let lowestValue: number;
+    habits.forEach((habit) => {
+        if (habit.value < lowestValue || lowestValue === undefined) {
+            res = habit;
+            lowestValue = habit.value;
+        }
+    });
+    return res;
+}
+
+export function getHighestValueHabit(habits: IHabit[]): IHabit {
+    let res: IHabit;
+    let highestValue: number;
+    habits.forEach((habit) => {
+        if (habit.value > highestValue || highestValue === undefined) {
+            res = habit;
+            highestValue = habit.value;
+        }
+    });
+    return res;
+}

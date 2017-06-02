@@ -1,18 +1,8 @@
-import { IHabit } from "src/IHabiticaData";
+import { IHabit, getLowestValueHabit } from "./IHabiticaData";
 import { useSkill, Skills } from "./useSkill";
 import { requestUserData } from "./userData";
 
-function getLowestValueHabit(habits: IHabit[]): IHabit {
-    let res: IHabit;
-    let lowestValue: number;
-    habits.forEach((habit) => {
-        if (habit.value < lowestValue || lowestValue === undefined) {
-            res = habit;
-            lowestValue = habit.value;
-        }
-    });
-    return res;
-}
+
 
 function bumpHabitValue(habit: IHabit, str: number) {
     const smashMod = 2.5 * str / (str + 35);

@@ -4,7 +4,7 @@ import { credentials } from "../secret/credentials";
 import { IHabit } from "src/IHabiticaData";
 
 
-export function useSkill(skill: Skills, habitId: string, onEnd: () => void) {
+export function useSkill(skill: Skills, habitId: string, onEnd?: () => void) {
     const options: RequestOptions = {
         method: "POST",
         host: "habitica.com",
@@ -26,13 +26,13 @@ export function useSkill(skill: Skills, habitId: string, onEnd: () => void) {
                 const bodyJson = JSON.parse(body);
                 console.log(`${res.statusCode} ${bodyJson["error"]}: ${bodyJson["message"]}`);
             }
-            onEnd();
+            if (onEnd) { onEnd(); }
         });
     });
     req.end();
 }
 
-export type Skills = 
+export type Skills =
     "fireball" |
     "mpHeal" |
     "earth" |

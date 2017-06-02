@@ -4,7 +4,8 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "smash": "ts-node src/AllTheSmash.ts"
+        "smash": "ts-node src/AllTheSmash.ts",
+        "stab": "ts-node src/AllTheBackstab.ts"
     },
     "dependencies": {
         "ts-node": "^3.0.4",

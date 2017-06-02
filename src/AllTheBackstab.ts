@@ -1,0 +1,27 @@
+import { IHabit, getHighestValueHabit } from "./IHabiticaData";
+import { useSkill, Skills } from "./useSkill";
+import { requestUserData } from "./userData";
+
+function multiStab(stabCount: number) {
+    requestUserData((userData) => {
+        const habit = getHighestValueHabit(userData.tasks.habits);
+
+        function stab() {
+            useSkill("backStab", habit.id, () => {
+                stabCount -= 1;
+                if (stabCount > 0) {
+                    stab();
+                }
+            });
+        }
+
+        stab();
+    });
+}
+
+const stabCount = +process.argv[2];
+if (isNaN(stabCount)) {
+    console.log("Non-numeric input parameter");
+    process.exit(1);
+}
+multiStab(stabCount);
