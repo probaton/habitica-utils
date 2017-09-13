@@ -15,6 +15,7 @@ export interface IHabiticaData {
     tasks: {
         habits: IHabit[]
     }
+    lastCron: Date
 }
 
 export interface IHabit {
