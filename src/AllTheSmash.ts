@@ -1,7 +1,6 @@
 import { IHabit, getLowestValueHabit } from "./IHabiticaData";
 import { useSkill, Skills } from "./useSkill";
-import { requestUserData } from "./userData";
-
+import { getUserData } from "./userData";
 
 
 function bumpHabitValue(habit: IHabit, str: number) {
@@ -10,7 +9,7 @@ function bumpHabitValue(habit: IHabit, str: number) {
 }
 
 function multiSmash(smashCount: number) {
-    requestUserData((userData) => {
+    getUserData((userData) => {
         const habit = getLowestValueHabit(userData.tasks.habits);
 
         function smash() {
@@ -32,4 +31,5 @@ if (isNaN(smashCount)) {
     console.log("Non-numeric input parameter");
     process.exit(1);
 }
+
 multiSmash(smashCount);

@@ -1,9 +1,10 @@
 import { getHabReqOpts, callHabApi } from "./HabiticaRequest";
 
 
-export function useSkill(skill: Skills, habitId: string, onEnd?: () => void) {
-    const skillApiSuffix = `/api/v3/user/class/cast/${skill}?targetId=${habitId}`;
-    const skillCallOpts = getHabReqOpts("POST", skillApiSuffix);
+export function useSkill(skill: Skills, habitId?: string, onEnd?: () => void) {
+    let apiSuffix = `/api/v3/user/class/cast/${skill}`;
+    apiSuffix += habitId ? `?targetId=${habitId}`: "";
+    const skillCallOpts = getHabReqOpts("post", apiSuffix);
     callHabApi(skillCallOpts, onEnd);
 }
 

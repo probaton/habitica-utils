@@ -1,37 +1,33 @@
-import { request, RequestOptions } from "https";
+import * as request from "request";
 import { credentials } from "../secret/credentials";
 
-export function getHabReqOpts(method: "POST" | "GET", apiPathSuffix: string): RequestOptions {
-    const options: RequestOptions = {
+export function getHabReqOpts(method: "post" | "get", apiSuffix: string, body?) {
+    const options = {
         method: method,
-        host: "habitica.com",
-        path: apiPathSuffix,
+        json: true,
+        url: "https://habitica.com" + apiSuffix,
+        body: body,
         headers: {
             "x-api-user": credentials.habId,
             "x-api-key": credentials.habToken
         }
-    }
+    };
 
-return options;
+    return options;
 }
 
-export function callHabApi(options: RequestOptions, onEnd?: (data?) => void): any {
-    const req = request(options, (res) => {
-        let body = "";
-        res.setEncoding("utf8");
-        res.on("data", (chunk) => {
-            body += chunk;
-        });
-        res.on("end", () => {
-            if (res.statusCode != 200) {
-                const bodyJson = JSON.parse(body);
-                console.log(`${res.statusCode} ${bodyJson["error"]}: ${bodyJson["message"]}`);
-            }
-            if (onEnd) { 
-                const jsonData = JSON.parse(body);
-                onEnd(jsonData);
-            }
-        });
+export function callHabApi(options, onEnd?: (data?) => void): any {
+    request(options, function (err, res, body) {
+        if (err) {
+          console.error("Request failed: ", err);
+          throw err;
+        }
+        if (res.statusCode != 200) {
+            const bodyJson = JSON.parse(body);
+            console.log(`${res.statusCode} ${bodyJson["error"]}: ${bodyJson["message"]}`);
+        }
+        if (onEnd) {
+            onEnd(body);
+        }
     });
-    req.end();
 }
