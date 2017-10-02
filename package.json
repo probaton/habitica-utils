@@ -5,7 +5,8 @@
     "license": "MIT",
     "scripts": {
         "smash": "ts-node src/AllTheSmash.ts",
-        "stab": "ts-node src/AllTheBackstab.ts"
+        "stab": "ts-node src/AllTheBackstab.ts",
+        "toDo": "ts-node src/ToDo.ts"
     },
     "dependencies": {
         "ts-node": "^3.0.4",

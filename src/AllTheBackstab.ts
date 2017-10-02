@@ -7,7 +7,6 @@ function multiStab(stabCount: number) {
         const habit = getHighestValueHabit(userData.tasks.habits);
 
         function stab() {
-            console.log(">>>> ?", stabCount);
             useSkill("backStab", habit.id, () => {
                 stabCount -= 1;
                 if (stabCount > 0) {
@@ -25,5 +24,4 @@ if (isNaN(stabCount)) {
     console.log("Non-numeric input parameter");
     process.exit(1);
 }
-console.log(">>>>> wtf mate");
 multiStab(stabCount);
