@@ -6,6 +6,7 @@
     "scripts": {
         "smash": "ts-node src/AllTheSmash.ts",
         "stab": "ts-node src/AllTheBackstab.ts",
+        "pick": "ts-node src/AllThePickpocket.ts",
         "toDo": "ts-node src/ToDo.ts"
     },
     "dependencies": {

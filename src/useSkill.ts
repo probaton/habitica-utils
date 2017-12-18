@@ -1,4 +1,6 @@
 import { getHabReqOpts, callHabApi } from "./HabiticaRequest";
+import { getHighestValueHabit } from "./IHabiticaData";
+import { getUserData } from "./userData";
 
 
 export function useSkill(skill: Skills, habitId?: string, onEnd?: () => void) {
@@ -6,6 +8,22 @@ export function useSkill(skill: Skills, habitId?: string, onEnd?: () => void) {
     apiSuffix += habitId ? `?targetId=${habitId}`: "";
     const skillCallOpts = getHabReqOpts("post", apiSuffix);
     callHabApi(skillCallOpts, onEnd);
+}
+
+export function useSkillOnHighestValueHabit(skill: Skills, count: number) {
+    getUserData((userData) => {
+        const habit = getHighestValueHabit(userData.tasks.habits);
+
+        function iterate() {
+            useSkill(skill, habit.id, () => {
+                count -= 1;
+                if (count > 0) { iterate(); }
+            });
+        }
+
+        iterate();
+    });
+
 }
 
 export type Skills =

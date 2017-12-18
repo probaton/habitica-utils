@@ -1,13 +1,13 @@
 import { IHabit } from "./IHabiticaData";
 import { useSkillOnHighestValueHabit, Skills, useSkill } from "./useSkill";
 
-function multiStab(stabCount: number) {
-    useSkillOnHighestValueHabit("backStab", stabCount);
+function multiPickpocket(pickCount: number) {
+    useSkillOnHighestValueHabit("pickPocket", pickCount);
 }
 
-const stabCount = +process.argv[2];
-if (isNaN(stabCount)) {
+const pickCount = +process.argv[2];
+if (isNaN(pickCount)) {
     console.log("Non-numeric input parameter");
     process.exit(1);
 }
-multiStab(stabCount);
+multiPickpocket(pickCount);
