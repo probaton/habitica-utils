@@ -10,12 +10,13 @@ export function useSkill(skill: Skills, habitId?: string, onEnd?: () => void) {
     callHabApi(skillCallOpts, onEnd);
 }
 
-export function useSkillOnHighestValueHabit(skill: Skills, count: number) {
+export function useSkillOnHighestValueHabit(skill: Skills, count: number, successMessage?: string) {
     getUserData((userData) => {
         const habit = getHighestValueHabit(userData.tasks.habits);
 
         function iterate() {
             useSkill(skill, habit.id, () => {
+                if (successMessage) { console.log(successMessage); }
                 count -= 1;
                 if (count > 0) { iterate(); }
             });

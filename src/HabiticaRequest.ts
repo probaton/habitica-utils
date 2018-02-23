@@ -21,11 +21,9 @@ export function callHabApi(options, onEnd?: (data?) => void): any {
         if (err) {
           console.error("Request failed: ", err);
           throw err;
-        }
-        if (res.statusCode != 200 && res.statusCode != 201) {
+        } else if (res.statusCode != 200 && res.statusCode != 201) {
             console.log(`${res.statusCode} ${body["error"]}: ${body["message"]}`);
-        }
-        if (onEnd) {
+        } else if (onEnd) {
             onEnd(body);
         }
     });
