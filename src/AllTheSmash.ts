@@ -26,10 +26,7 @@ function multiSmash(smashCount: number) {
     });
 }
 
-const smashCount = +process.argv[2];
-if (isNaN(smashCount)) {
-    console.log("Non-numeric input parameter");
-    process.exit(1);
-}
+// Count defaults to arbitrary high number as a poor man's version of 'spam until OOM'.
+const count = isNaN(+process.argv[2]) ? 1000 : +process.argv[2];
 
-multiSmash(smashCount);
+multiSmash(count);
