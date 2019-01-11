@@ -11,8 +11,9 @@
         "toDo": "ts-node src/ToDo.ts"
     },
     "dependencies": {
+        "request": "^2.88.0",
         "ts-node": "^3.0.4",
         "typescript": "^2.3.2",
-      "typescript-rest": "^1.0.2"
+        "typescript-rest": "^1.0.2"
     }
 }
