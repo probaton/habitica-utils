@@ -10,7 +10,8 @@ export function getHabReqOpts(method: "post" | "get", apiSuffix: string, body?) 
         headers: {
             "x-api-user": credentials.habId,
             "x-api-key": credentials.habToken
-        }
+        },
+        strictSSL: false,
     };
 
     return options;
