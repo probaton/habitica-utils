@@ -1,11 +1,6 @@
 import { callHabApi, getHabReqOpts } from "../requests/HabiticaRequest";
 import { getUserData } from"../userData/userData";
-import { IHabiticaData } from "src/userData/IHabiticaData";
-
-interface FoodCount {
-    food: string, 
-    count: number,
-}
+import { IHabiticaData } from "../userData/IHabiticaData";
 
 function collectLikedFoods(petType: string): string[] {
     const foodTypes = [
@@ -32,29 +27,30 @@ function collectLikedFoods(petType: string): string[] {
     return likedFoods;
 }
 
-function makeFoodCounter(likedFoods: string[], userData: IHabiticaData): FoodCount[] {
-    const userFood = userData["items"]["food"];
-    return likedFoods.map(food => { return { food: food, count: userFood[food] } });
-} 
-
-function feedPet(petId: string, petType: string, food: string): void {
-    const feedOpts = getHabReqOpts("post", `/api/v3/user/feed/${petId}-${petType}/${food}`); 
-    callHabApi(feedOpts, () => {
-        
-        console.log("Omnomnom")
+function makeFoodCounter(likedFoods: string[], userData: IHabiticaData): string[] {
+    const userFood = userData.items.food;
+    const foodCount = [];
+    likedFoods.forEach(food => {
+        for (let i = userFood[food]; i > 0; i--) foodCount.push(food);
     });
-}
+    return foodCount;
+}   
 
 function spamFood(petId: string, petType: string): void {
     const likedFoods = collectLikedFoods(petType);
-    getUserData(userData => {
-        makeFoodCounter(likedFoods, userData)
-            .forEach(foodCount => {
-                while (foodCount.count > 0) {
-                    feedPet(petId, petType, foodCount.food);
-                    foodCount.count--;
-                }
+    
+    function iterate(foodCount: string[]) {
+        if (foodCount.length > 0) {
+            const feedOpts = getHabReqOpts("post", `/api/v3/user/feed/${petId}-${petType}/${foodCount.pop()}`); 
+            callHabApi(feedOpts, () => {
+                console.log("Omnomnom")
+                iterate(foodCount);
             });
+        }
+    }
+
+    getUserData(userData => {
+        iterate(makeFoodCounter(likedFoods, userData));
     });
 }
 

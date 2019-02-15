@@ -17,8 +17,8 @@ export function useSkillOnHighestValueHabit(skill: Skills, count: number, succes
         function iterate() {
             useSkill(skill, habit.id, () => {
                 if (successMessage) { console.log(successMessage); }
-                count -= 1;
-                if (count > 0) { iterate(); }
+                count--;
+                if (count > 0) iterate(); 
             });
         }
 

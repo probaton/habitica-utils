@@ -1,8 +1,8 @@
 import * as request from "request";
 import { credentials } from "../../secret/credentials";
 
-export function getHabReqOpts(method: "post" | "get", apiSuffix: string, body?) {
-    const options = {
+export function getHabReqOpts(method: "post" | "get", apiSuffix: string, body?: any) {
+    return {
         method: method,
         json: true,
         url: "https://habitica.com" + apiSuffix,
@@ -13,8 +13,6 @@ export function getHabReqOpts(method: "post" | "get", apiSuffix: string, body?) 
         },
         strictSSL: false,
     };
-
-    return options;
 }
 
 export function callHabApi(options, onEnd?: (data?) => void): any {
