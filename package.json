@@ -9,7 +9,8 @@
         "pick": "ts-node src/skills/AllThePickpocket.ts",
         "fire": "ts-node src/skills/AllTheFireball.ts",
         "toDo": "ts-node src/tasks/ToDo.ts",
-        "feed": "ts-node src/items/SpamFood.ts"
+        "feed": "ts-node src/items/SpamFood.ts",
+        "list": "ts-node src/items/listItems.ts"
     },
     "dependencies": {
         "request": "^2.88.0",
