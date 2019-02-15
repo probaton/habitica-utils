@@ -1,5 +1,4 @@
-import { IHabit } from "./IHabiticaData";
-import { useSkillOnHighestValueHabit, Skills, useSkill } from "./useSkill";
+import { useSkillOnHighestValueHabit } from "./useSkill";
 
 
 // Count defaults to arbitrary high number as a poor man's version of 'spam until OOM'.

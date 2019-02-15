@@ -1,4 +1,4 @@
-import { IHabit } from "./IHabiticaData";
+import { IHabit } from "../userData/IHabiticaData";
 import { useSkillOnHighestValueHabit, Skills, useSkill } from "./useSkill";
 
 function multiPickpocket(pickCount: number) {

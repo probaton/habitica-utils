@@ -1,5 +1,5 @@
 import * as request from "request";
-import { credentials } from "../secret/credentials";
+import { credentials } from "../../secret/credentials";
 
 export function getHabReqOpts(method: "post" | "get", apiSuffix: string, body?) {
     const options = {

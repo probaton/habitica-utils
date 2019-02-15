@@ -1,6 +1,6 @@
-import { IHabit, getLowestValueHabit } from "./IHabiticaData";
+import { IHabit, getLowestValueHabit } from "../userData/IHabiticaData";
 import { useSkill, Skills } from "./useSkill";
-import { getUserData } from "./userData";
+import { getUserData } from "../userData/userData";
 
 
 function bumpHabitValue(habit: IHabit, str: number) {

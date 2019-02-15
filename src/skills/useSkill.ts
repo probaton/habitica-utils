@@ -1,6 +1,6 @@
-import { getHabReqOpts, callHabApi } from "./HabiticaRequest";
-import { getHighestValueHabit } from "./IHabiticaData";
-import { getUserData } from "./userData";
+import { getHabReqOpts, callHabApi } from "../requests/HabiticaRequest";
+import { getHighestValueHabit } from "../userData/IHabiticaData";
+import { getUserData } from"../userData/userData";
 
 
 export function useSkill(skill: Skills, habitId?: string, onEnd?: () => void) {
