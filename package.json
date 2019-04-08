@@ -10,9 +10,11 @@
         "fire": "ts-node src/skills/AllTheFireball.ts",
         "toDo": "ts-node src/tasks/ToDo.ts",
         "feed": "ts-node src/items/SpamFood.ts",
-        "list": "ts-node src/items/listItems.ts"
+        "list": "ts-node src/items/listItems.ts",
+        "data": "ts-node src/userData/downloadUserData.ts"
     },
     "dependencies": {
+        "@types/request": "^2.48.1",
         "request": "^2.88.0",
         "ts-node": "^3.0.4",
         "typescript": "^2.3.2",
