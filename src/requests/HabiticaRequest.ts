@@ -1,4 +1,5 @@
 import * as request from "request";
+
 import { credentials } from "../../secret/credentials";
 
 export function getHabReqOpts(method: "post" | "get", apiSuffix: string, body?: any) {
@@ -8,6 +9,7 @@ export function getHabReqOpts(method: "post" | "get", apiSuffix: string, body?: 
         url: "https://habitica.com" + apiSuffix,
         body: body,
         headers: {
+            "x-client": credentials.habId + "-habitica-utils",
             "x-api-user": credentials.habId,
             "x-api-key": credentials.habToken
         },
