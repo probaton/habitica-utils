@@ -16,8 +16,8 @@
     "dependencies": {
         "@types/request": "^2.48.1",
         "request": "^2.88.0",
-        "ts-node": "^3.0.4",
-        "typescript": "^2.3.2",
-        "typescript-rest": "^1.0.2"
+        "ts-node": "^8.3.0",
+        "typescript": "^3.5.3",
+        "typescript-rest": "^2.2.0"
     }
 }
