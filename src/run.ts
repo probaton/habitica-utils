@@ -1,10 +1,12 @@
 #!/usr/bin/env node
-
 import toDo from "./tasks/ToDo";
+import { findUserMessages, searchMessages } from "./messages/findMessages";
 
 function performCommand(command, arg) {
     switch (command) {
-        case "toDo": return toDo(arg);
+        case "to-do": return toDo(arg);
+        case "user-messages": return findUserMessages(arg);
+        case "search-messages": return searchMessages(arg);
         default: return new Promise(resolve => resolve(`${command} is not a valid command`));
     }
 }
