@@ -1,3 +1,4 @@
-secret/
+secret/credentials.ts
 node_modules/
 data/
+dist/

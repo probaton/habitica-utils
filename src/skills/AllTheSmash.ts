@@ -1,5 +1,5 @@
 import { IHabit, getLowestValueHabit } from "../userData/IHabiticaData";
-import { useSkill, Skills } from "./useSkill";
+import { useSkill } from "./useSkill";
 import { getUserData } from "../userData/userData";
 
 
