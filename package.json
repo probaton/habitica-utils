@@ -1,9 +1,10 @@
 {
-    "name": "habitica",
+    "name": "habitica-utils",
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
     "scripts": {
+        "build": "tsc",
         "smash": "ts-node src/skills/AllTheSmash.ts",
         "stab": "ts-node src/skills/AllTheBackstab.ts",
         "pick": "ts-node src/skills/AllThePickpocket.ts",
@@ -13,8 +14,13 @@
         "list": "ts-node src/items/listItems.ts",
         "data": "ts-node src/userData/downloadUserData.ts"
     },
+    "preferGlobal": true,
+    "bin": {
+        "hab": "./dist/src/run.js"
+    },
     "dependencies": {
         "@types/request": "^2.48.1",
+        "got": "^11.8.0",
         "request": "^2.88.0",
         "ts-node": "^8.3.0",
         "typescript": "^3.5.3",

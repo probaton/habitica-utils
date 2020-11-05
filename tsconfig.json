@@ -1,21 +1,13 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es5",
+        "target": "es2019",
         "noImplicitAny": false,
-        "sourceMap": false,
         "allowJs": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "lib": [
-            "dom",
-            "es6"
-        ],
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "noFallthroughCasesInSwitch": true,
         "outDir": "dist",
-        "baseUrl": "."
     },
-    "include": [
-        "./typings/",
-        "./src/**/*.ts"
-    ]
+    "include": ["./src/**/*.ts"]
 }
