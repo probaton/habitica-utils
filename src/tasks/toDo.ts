@@ -1,6 +1,6 @@
 import callHabApi from "../requests/callHabitica";
 
-export default async function toDo(message: string): Promise<string> {
+export async function toDo(message: string): Promise<string> {
     if (!message) {
         return "To-do message is required";
     }
@@ -11,4 +11,8 @@ export default async function toDo(message: string): Promise<string> {
     }
     await callHabApi("post", "/api/v3/tasks/user", { json, errorMessage: "Failed to post to-do" });
     return "To-do posted";
+}
+
+export async function fppTestToDo(jiraNumber: number) {
+    return toDo(`[Test FPP-${jiraNumber}](https://jira.homeadvisor.com/browse/FPS-${jiraNumber})`);
 }
