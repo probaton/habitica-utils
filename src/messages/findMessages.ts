@@ -1,9 +1,25 @@
 import callHabApi from "../requests/callHabitica";
 import { Skills } from "../skills/useSkill";
 
+function addLeadingZeroes(number: number, expectedDigits: number) {
+    let result = number.toString();
+    while ((expectedDigits - result.length)) {
+        result = `0${result}`;
+    }
+    return result;
+}
+
 function parseMsgList(msgs: IHabiticaChatMessage[]) {
     return msgs
-        .map(msg => msg.unformattedText)
+        .map(msg => {
+            const date = new Date(msg.timestamp);
+            const month = addLeadingZeroes(date.getMonth(), 2);
+            const dayOfMonth = addLeadingZeroes(date.getDate(), 2);
+            const hours = addLeadingZeroes(date.getHours(), 2);
+            const minutes = addLeadingZeroes(date.getMinutes(), 2);
+            const formattedDate = `${date.getFullYear()}-${month}-${dayOfMonth} ${hours}:${minutes}`;
+            return `[${formattedDate}] ${msg.unformattedText}`;
+        })
         .reduce((aggregate, msg) => `${aggregate}\n${msg}`);
 }
 
