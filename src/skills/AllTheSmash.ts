@@ -8,22 +8,21 @@ function bumpHabitValue(habit: IHabit, str: number) {
     habit.value += smashMod;
 }
 
-function multiSmash(smashCount: number) {
-    getUserData((userData) => {
-        const habit = getLowestValueHabit(userData.tasks.habits);
+async function multiSmash(smashCount: number) {
+    const userData = await getUserData();
+    const habit = getLowestValueHabit(userData.tasks.habits);
 
-        function smash() {
-            useSkill("smash", habit.id, () => {
-                bumpHabitValue(habit, userData.stats.str);
-                smashCount -= 1;
-                if (smashCount > 0) {
-                    smash();
-                }
-            });
-        }
+    function smash() {
+        useSkill("smash", habit.id, () => {
+            bumpHabitValue(habit, userData.stats.str);
+            smashCount -= 1;
+            if (smashCount > 0) {
+                smash();
+            }
+        });
+    }
 
-        smash();
-    });
+    smash();
 }
 
 // Count defaults to arbitrary high number as a poor man's version of 'spam until OOM'.

@@ -1,7 +1,6 @@
 import { IHabiticaData } from "./IHabiticaData";
-import { getHabReqOpts, callHabApi } from "../requests/HabiticaRequest";
+import callHabApi from "../requests/callHabitica";
 
-export function getUserData(onEnd: (userData: IHabiticaData) => void) {
-    const userDataCallOpts = getHabReqOpts("get", "/export/userdata.json");
-    callHabApi(userDataCallOpts, onEnd); 
+export async function getUserData(): Promise<IHabiticaData> {
+    return callHabApi("get", "/export/userdata.json");
 }

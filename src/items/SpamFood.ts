@@ -36,7 +36,7 @@ function makeFoodCounter(likedFoods: string[], userData: IHabiticaData): string[
     return foodCount;
 }   
 
-function spamFood(petId: string, petType: string): void {
+async function spamFood(petId: string, petType: string): Promise<void> {
     const likedFoods = collectLikedFoods(petType);
     
     function iterate(foodCount: string[]) {
@@ -49,9 +49,8 @@ function spamFood(petId: string, petType: string): void {
         }
     }
 
-    getUserData(userData => {
-        iterate(makeFoodCounter(likedFoods, userData));
-    });
+    const userData = await getUserData();
+    iterate(makeFoodCounter(likedFoods, userData));
 }
 
 const petId = process.argv[2];

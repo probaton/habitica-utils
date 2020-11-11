@@ -1,18 +1,19 @@
 import * as fs from "fs";
 import { getUserData } from "../userData/userData";
 
-getUserData(userData => {
+export default async function downloadUserData() {
+    const userData = await getUserData();
     ensureDirSync("data");
-    fs.writeFileSync("data/userData.json", JSON.stringify(userData));
-    console.log(`Data saved in ${process.cwd()}/data/userData.json`);
-});
+    fs.writeFileSync("data/userData.json", JSON.stringify(userData, undefined, 2));
+    return `Data saved in ${process.cwd()}/data/userData.json`;
+}
 
 function ensureDirSync(dirPath: string) {
     try {
         fs.mkdirSync(dirPath, { recursive: true });
-    } catch (err) {
-        if (err.code !== 'EEXIST') {
-            throw err;
+    } catch (e) {
+        if (e.code !== 'EEXIST') {
+            throw e;
         }
     }
 }

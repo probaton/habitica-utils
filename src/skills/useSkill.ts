@@ -10,21 +10,19 @@ export function useSkill(skill: Skills, habitId?: string, onEnd?: () => void) {
     callHabApi(skillCallOpts, onEnd);
 }
 
-export function useSkillOnHighestValueHabit(skill: Skills, count: number, successMessage?: string) {
-    getUserData((userData) => {
-        const habit = getHighestValueHabit(userData.tasks.habits);
+export async function useSkillOnHighestValueHabit(skill: Skills, count: number, successMessage?: string) {
+    const userData = await getUserData();
+    const habit = getHighestValueHabit(userData.tasks.habits);
 
-        function iterate() {
-            useSkill(skill, habit.id, () => {
-                if (successMessage) { console.log(successMessage); }
-                count--;
-                if (count > 0) iterate(); 
-            });
-        }
+    function iterate() {
+        useSkill(skill, habit.id, () => {
+            if (successMessage) { console.log(successMessage); }
+            count--;
+            if (count > 0) iterate(); 
+        });
+    }
 
-        iterate();
-    });
-
+    iterate();
 }
 
 export type Skills =

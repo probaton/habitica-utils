@@ -11,15 +11,14 @@ export interface IHabiticaData {
         exp: number;
         mp: number;
         hp: number;
-    }
+    };
     tasks: {
         habits: IHabit[];
-    }
+    };
     lastCron: string;
     items: {
         food: IFood;
-    }
-
+    };
 }
 
 export interface IFood {
