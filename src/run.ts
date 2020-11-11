@@ -2,9 +2,11 @@
 import { fppTestToDo, toDo } from "./tasks/ToDo";
 import { findUserMessages, searchMessages } from "./messages/findMessages";
 import downloadUserData from "./userData/downloadUserData";
+import clearNotifications from "./notifications/clearNotifications";
 
 function performCommand(command, arg) {
     switch (command) {
+        case "clear-notifications": return clearNotifications();
         case "to-do": return toDo(arg);
         case "fpp-test-to-do": return fppTestToDo(arg);
         case "search-messages": return searchMessages(arg);

@@ -19,6 +19,7 @@ export interface IHabiticaData {
     items: {
         food: IFood;
     };
+    notifications: INotification[];
 }
 
 export interface IFood {
@@ -75,6 +76,16 @@ export interface IHabit {
     down: false;
     up: true
     id: string;
+}
+
+export interface INotification {
+    id: string;
+    data: {
+        bodyText: string;
+        headerText: string;
+    };
+    seen: boolean;
+    type: string;
 }
 
 export function getLowestValueHabit(habits: IHabit[]): IHabit {
